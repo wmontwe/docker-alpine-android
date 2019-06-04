@@ -77,5 +77,5 @@ sdkmanager --list
 Then include the following line in your Dockerfile and add all needed packages:
 
 ```dockerfile
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager <list-of-packages>
+RUN sdkmanager <list-of-packages>
 ```
