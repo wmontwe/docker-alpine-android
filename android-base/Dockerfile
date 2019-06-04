@@ -12,37 +12,38 @@ ENV PATH "${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME
 
 
 # Install required dependencies for Alpine
-RUN apk update \
-    && apk upgrade \
-    && apk add --no-cache \
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache && \
       bash \
       git \
       unzip \
-      wget \
-    && wget -q https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -O /etc/apk/keys/sgerrand.rsa.pub \
-    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O /tmp/glibc.apk \
-    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O /tmp/glibc-bin.apk \
-    && apk add --no-cache /tmp/glibc.apk /tmp/glibc-bin.apk \
-    && apk add --virtual .rundeps $runDeps \
-    && rm -rf /tmp/* \
-    && rm -rf /var/cache/apk/*
+      wget && \
+    wget -q https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -O /etc/apk/keys/sgerrand.rsa.pub && \
+    wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O /tmp/glibc.apk && \
+    wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O /tmp/glibc-bin.apk && \
+    apk add --no-cache /tmp/glibc.apk /tmp/glibc-bin.apk && \
+    apk add --virtual .rundeps $runDeps && \
+    rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/*
 
 # Download and extract Android SDK
-RUN wget -q http://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_VERSION}.zip -O /tmp/android-sdk.zip \
-    && mkdir -p ${ANDROID_HOME} \
-    && unzip -qq /tmp/android-sdk.zip -d ${ANDROID_HOME} \
-    && rm -v /tmp/android-sdk.zip
+RUN wget -q http://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_VERSION}.zip -O /tmp/android-sdk.zip && \
+    mkdir -p ${ANDROID_HOME} && \
+    unzip -qq /tmp/android-sdk.zip -d ${ANDROID_HOME} && \
+    rm -v /tmp/android-sdk.zip
 
 
 # Pepare Android SDK
 
 ## Add missing files
-RUN mkdir -p ~/.android && touch ~/.android/repositories.cfg
+RUN mkdir -p ~/.android && \
+    touch ~/.android/repositories.cfg
 
 ## Install Android SDK
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager --update \
-    && yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
-    && ${ANDROID_HOME}/tools/bin/sdkmanager \
+RUN sdkmanager --update && \
+    yes | sdkmanager --licenses && \
+    sdkmanager \
         "tools" \
         "platform-tools" \
         "extras;android;m2repository" \
