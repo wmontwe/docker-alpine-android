@@ -1,8 +1,5 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk
 LABEL maintainer="Wolf Montwe <wolf@wolfmontwe.de>"
-
-# Alpine related
-ENV GLIBC_VERSION "2.29-r0"
 
 # Check Linux SDK package: https://developer.android.com/studio/index.html#downloads
 ENV ANDROID_SDK_TOOLS_VERSION "4333796"
@@ -11,22 +8,8 @@ ENV ANDROID_SDK_TOOLS_VERSION "4333796"
 ENV ANDROID_SDK_ROOT "/opt/android-sdk-linux"
 ENV PATH "${PATH}:${ANDROID_SDK_ROOT}/tools:${ANDROID_SDK_ROOT}/tools/bin:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/build-tools"
 
-
-# Install required dependencies for Alpine
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache && \
-      bash \
-      git \
-      unzip \
-      wget && \
-    wget -q https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -O /etc/apk/keys/sgerrand.rsa.pub && \
-    wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O /tmp/glibc.apk && \
-    wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O /tmp/glibc-bin.apk && \
-    apk add --no-cache /tmp/glibc.apk /tmp/glibc-bin.apk && \
-    apk add --virtual .rundeps $runDeps && \
-    rm -rf /tmp/* && \
-    rm -rf /var/cache/apk/*
+# Install required dependencies
+RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends
 
 # Download and extract Android SDK
 RUN wget -q http://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_VERSION}.zip -O /tmp/android-sdk.zip && \

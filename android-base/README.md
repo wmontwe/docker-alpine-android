@@ -44,6 +44,7 @@ docker pull wolfmontwe/docker-alpine-android-base
 ```bash
 git clone https://github.com/wmontwe/docker-alpine-android.git && cd docker-alpine-android
 docker build --no-cache -f android-base/Dockerfile -t docker-alpine-android-base .
+docker run --rm -it docker-alpine-android-base
 ```
 
 ### As locally running container
