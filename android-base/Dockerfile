@@ -7,8 +7,9 @@ ENV GLIBC_VERSION "2.29-r0"
 # Check Linux SDK package: https://developer.android.com/studio/index.html#downloads
 ENV ANDROID_SDK_TOOLS_VERSION "4333796"
 
-ENV ANDROID_HOME "/opt/android-sdk-linux"
-ENV PATH "${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/build-tools"
+# See also https://developer.android.com/studio/command-line/variables
+ENV ANDROID_SDK_ROOT "/opt/android-sdk-linux"
+ENV PATH "${PATH}:${ANDROID_SDK_ROOT}/tools:${ANDROID_SDK_ROOT}/tools/bin:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/build-tools"
 
 
 # Install required dependencies for Alpine
@@ -29,8 +30,8 @@ RUN apk update && \
 
 # Download and extract Android SDK
 RUN wget -q http://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_VERSION}.zip -O /tmp/android-sdk.zip && \
-    mkdir -p ${ANDROID_HOME} && \
-    unzip -qq /tmp/android-sdk.zip -d ${ANDROID_HOME} && \
+    mkdir -p ${ANDROID_SDK_ROOT} && \
+    unzip -qq /tmp/android-sdk.zip -d ${ANDROID_SDK_ROOT} && \
     rm -v /tmp/android-sdk.zip
 
 
@@ -52,4 +53,4 @@ RUN sdkmanager --update && \
         "extras;google;instantapps"
 
 # Set workdir
-WORKDIR /home
+WORKDIR /workspace
