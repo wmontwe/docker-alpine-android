@@ -9,7 +9,7 @@ ENV GOOGLE_CLOUD_HOME "/opt/google-cloud-sdk"
 ENV PATH "${PATH}:${GOOGLE_CLOUD_HOME}/bin"
 
 # Install required dependencies for Google Cloud SDK
-RUN apk add --no-cache \
+RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
       python
 
 # Download and extract Google cloud services SDK

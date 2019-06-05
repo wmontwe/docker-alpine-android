@@ -13,15 +13,15 @@ Based on:
 
 ### Android SDK packages
 
-  Path                               | Version | Description                         | Location
-  -------                            | ------- | -------                             | -------
-  extras;android;m2repository        | 47.0.0  | Android Support Repository          | extras/android/m2repository/
+  Path                               | Version | Description                         | Location                           
+  -------                            | ------- | -------                             | -------                            
+  extras;android;m2repository        | 47.0.0  | Android Support Repository          | extras/android/m2repository/       
   extras;google;google_play_services | 49      | Google Play services                | extras/google/google_play_services/
-  extras;google;instantapps          | 1.7.0   | Google Play Instant Development SDK | extras/google/instantapps/
-  extras;google;m2repository         | 58      | Google Repository                   | extras/google/m2repository/
-  patcher;v4                         | 1       | SDK Patch Applier v4                | patcher/v4/
-  platform-tools                     | 28.0.3  | Android SDK Platform-Tools          | platform-tools/
-  tools                              | 26.1.1  | Android SDK Tools 26.1.1            | tools/
+  extras;google;instantapps          | 1.7.0   | Google Play Instant Development SDK | extras/google/instantapps/         
+  extras;google;m2repository         | 58      | Google Repository                   | extras/google/m2repository/        
+  patcher;v4                         | 1       | SDK Patch Applier v4                | patcher/v4/                        
+  platform-tools                     | 28.0.3  | Android SDK Platform-Tools          | platform-tools/                    
+  tools                              | 26.1.1  | Android SDK Tools 26.1.1            | tools/ 
 
 ## Usage
 
