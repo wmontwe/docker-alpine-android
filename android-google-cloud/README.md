@@ -46,6 +46,16 @@ docker run --rm -it wolfmontwe/docker-alpine-android:android-gc
 
 ## Maintenance
 
+### Alpine
+
+If you want to install an Alpine package, please have a look at the available [packages](https://pkgs.alpinelinux.org/packages?branch=v3.9)
+
+Then just include the following line in your Dockerfile and add all needed packages:
+
+```dockerfile
+RUN apk add --no-cache <list-of-packages>
+```
+
 ### Google Cloud SDK
 
 Have a look at the [quickstart Linux guide](https://cloud.google.com/sdk/docs/quickstart-linux)
